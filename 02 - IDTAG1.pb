@@ -16,6 +16,7 @@ Structure TAG_ID3V1
 EndStructure
 Global mp3.TAG_ID3V1
 
+;Pour lire le tag ID3 v1 il faut se placer à 128 octets de la fin du fichier
 Procedure GetSoundInfo(FileName.s,*Point)
   Protected File = ReadFile(#PB_Any, FileName, #PB_UTF8)
   If File
@@ -32,6 +33,7 @@ If FileName
   GetSoundInfo(FileName, mp3)
   
   With mp3
+    ;Si les 3 premiers octets représentent la mention "TAG"
     If PeekS(@\Tag, 3, #PB_UTF8) = "TAG"
       Debug PeekS(@\Title, -1, #PB_UTF8)
       Debug PeekS(@\Artist, -1, #PB_UTF8)
@@ -176,7 +178,7 @@ Procedure InitGenre()
   Genre(125) = "Dance Hall"
 EndProcedure
 ; IDE Options = PureBasic 5.60 (Windows - x86)
-; CursorPosition = 44
+; CursorPosition = 35
 ; FirstLine = 15
 ; Folding = --
 ; EnableXP
